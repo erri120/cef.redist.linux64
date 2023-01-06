@@ -1,4 +1,3 @@
-cef.tar.bz2
-extract/
-output/
+cef-*.tar.bz2
+extract-*/*
 *.nupkg

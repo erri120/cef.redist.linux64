@@ -21,7 +21,6 @@ if [ hash nuget 2>/dev/null ]; then
     exit 1
 fi
 
-# variables
 GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 GIT_COMMIT="$(git rev-parse HEAD)"
 
@@ -35,40 +34,28 @@ if [[ -z ${GIT_COMMIT} ]]; then
     exit 1
 fi
 
-CEF_VERSION="91.1.6"
-CEF_COMMIT="g8a752eb"
-CHROMIUM_VERSION="91.0.4472.77"
-
-DOWNLOAD_FILE="cef.tar.bz2"
-EXTRACT_DIR="extract"
-
-# https://regex101.com/r/WCk6mp/1
+# https://regex101.com/r/z1pJ56/1
 # bash doesn't support a lot of regex, so this looks slightly different
 INPUT_REGEX="https:\/\/cef-builds.spotifycdn.com\/cef_binary_([^\+\%]+)(\+|\%2B)([^\+\%]+)(\+|\%2B)chromium-([^_]+)_linux64_[^\.]+\.tar\.bz2"
 
-# use arguments, if any
-if [ $# -ne 0 ]; then
-    if [ $# -eq 1 ]; then
-        if [[ $1 =~ ${INPUT_REGEX} ]]; then
-            CEF_VERSION="${BASH_REMATCH[1]}"
-            CEF_COMMIT="${BASH_REMATCH[3]}"
-            CHROMIUM_VERSION="${BASH_REMATCH[5]}"
-        else
-            echo "first argument is not a valid CDN URL!"
-            echo $1
-            exit 1
-        fi
-    else
-        if [ $# -eq 3 ]; then
-            CEF_VERSION="$1"
-            CEF_COMMIT="$2"
-            CHROMIUM_VERSION="$3"
-        else
-            echo "not enough arguments: $#"
-            exit 1
-        fi
-    fi
+# parse arguments
+if [ $# -ne 1 ]; then
+    echo "script requires 1 argument"
+    exit 1
 fi
+
+if [[ $1 =~ ${INPUT_REGEX} ]]; then
+    CEF_VERSION="${BASH_REMATCH[1]}"
+    CEF_COMMIT="${BASH_REMATCH[3]}"
+    CHROMIUM_VERSION="${BASH_REMATCH[5]}"
+else
+    echo "first argument is not a valid CDN URL!"
+    echo $1
+    exit 1
+fi
+
+DOWNLOAD_FILE="cef-${CEF_VERSION}.tar.bz2"
+EXTRACT_DIR="extract-${CEF_VERSION}"
 
 echo "GIT_BRANCH: ${GIT_BRANCH}"
 echo "GIT_COMMIT: ${GIT_COMMIT}"
@@ -76,7 +63,7 @@ echo "CEF_VERSION: ${CEF_VERSION}"
 echo "CEF_COMMIT: ${CEF_COMMIT}"
 echo "CHROMIUM_VERSION: ${CHROMIUM_VERSION}"
 
-DOWNLOAD_URL="https://cef-builds.spotifycdn.com/cef_binary_${CEF_VERSION}+${CEF_COMMIT}+chromium-${CHROMIUM_VERSION}_linux64_beta_minimal.tar.bz2"
+DOWNLOAD_URL=$1
 echo "DOWNLOAD_URL: ${DOWNLOAD_URL}"
 
 # script
