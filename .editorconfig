@@ -11,3 +11,6 @@ trim_trailing_whitespace = true
 
 [*.{nuspec,props}]
 end_of_line = crlf
+
+[*.{yaml,yml}]
+indent_size = 2
