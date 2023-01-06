@@ -3,8 +3,9 @@
     <metadata>
         <id>cef.redist.linux64</id>
         <authors>The Chromium Embedded Framework Authors</authors>
-        <description>CEF - the Chromium Embedded Framework</description>
         <version>$version$</version>
+        <description>CEF - the Chromium Embedded Framework</description>
+        <tags>chrome chromium native embedded browser cef linux redist</tags>
 
         <license type="file">LICENSE.txt</license>
         <readme>README.md</readme>
