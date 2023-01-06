@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>cef.redist.linux64</id>
+        <authors>The Chromium Embedded Framework Authors</authors>
+        <description>CEF - the Chromium Embedded Framework</description>
+        <version>0.0.0</version>
+
+        <license type="file">LICENSE.txt</license>
+        <readme>README.md</readme>
+
+        <projectUrl>https://github.com/erri120/cef.redist.linux64</projectUrl>
+        <repository type="git" url="https://github.com/erri120/cef.redist.linux64.git" branch="master"/>
+    </metadata>
+    <files>
+        <file src="LICENSE.txt" target=""/>
+        <file src="README.md" target=""/>
+
+        <file src="cef.redist.linux64.props" target="build\"/>
+        <file src="output/**" target="CEF\"/>
+    </files>
+</package>

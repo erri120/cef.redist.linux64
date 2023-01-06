@@ -1,0 +1,12 @@
+* text=auto
+
+*.md  text diff=markdown
+*.txt text
+
+*.sh     text eol=lf
+*.nuspec text eol=crlf
+*.props  text eol=crlf
+
+.gitattributes export-ignore
+.gitignore     export-ignore
+.gitkeep       export-ignore
