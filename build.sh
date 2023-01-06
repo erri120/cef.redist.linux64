@@ -55,6 +55,7 @@ if [ $# -ne 0 ]; then
             CHROMIUM_VERSION="${BASH_REMATCH[5]}"
         else
             echo "first argument is not a valid CDN URL!"
+            echo $1
             exit 1
         fi
     else
