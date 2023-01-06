@@ -40,9 +40,7 @@ CEF_COMMIT="g8a752eb"
 CHROMIUM_VERSION="91.0.4472.77"
 
 DOWNLOAD_FILE="cef.tar.bz2"
-
 EXTRACT_DIR="extract"
-OUTPUT_DIR="output"
 
 # https://regex101.com/r/WCk6mp/1
 # bash doesn't support a lot of regex, so this looks slightly different
@@ -119,22 +117,5 @@ if [[ -z ${CEF_LICENSE_FILE} ]]; then
     exit 1
 fi
 
-if [ -d ${OUTPUT_DIR} ]; then
-    echo "preparing a clean output directory"
-    rm -rdf ${OUTPUT_DIR}
-fi
-
-echo "creating the output directory"
-mkdir ${OUTPUT_DIR}
-
-echo "copying release files"
-cp -r "${CEF_RELEASE_DIR}/"* "${OUTPUT_DIR}/"
-
-echo "copying resource files"
-cp -r "${CEF_RESOURCES_DIR}/"* "${OUTPUT_DIR}/"
-
-echo "copying license file"
-cp ${CEF_LICENSE_FILE} ${OUTPUT_DIR}
-
 echo "running nuget pack"
-nuget pack cef.redist.linux64.nuspec -properties "version=${CEF_VERSION};branch=${GIT_BRANCH};commit=${GIT_COMMIT}"
+nuget pack cef.redist.linux64.nuspec -properties "cef_release_dir=${CEF_RELEASE_DIR};cef_resources_dir=${CEF_RESOURCES_DIR};cef_license_file=${CEF_LICENSE_FILE};version=${CEF_VERSION};branch=${GIT_BRANCH};commit=${GIT_COMMIT}"
