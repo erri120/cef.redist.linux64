@@ -16,7 +16,7 @@ jobs:
     - name: Run script
       if: ${{ inputs.url }}
       shell: bash
-      run: build.sh ${{ inputs.url }}
+      run: ./build.sh ${{ inputs.url }}
 
     - name: Push to NuGet
       run: nuget push *.nupkg -ApiKey ${{ secrets.NUGET_API_KEY }} -Source https://api.nuget.org/v3/index.json
