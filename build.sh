@@ -44,7 +44,7 @@ EXTRACT_DIR="extract"
 
 # https://regex101.com/r/WCk6mp/1
 # bash doesn't support a lot of regex, so this looks slightly different
-INPUT_REGEX="https:\/\/cef-builds.spotifycdn.com\/cef_binary_([^\+\%]+)(\+|\%2B)([^\+\%]+)(\+|\%2B)chromium-([^_]+)_linux64_minimal\.tar\.bz2"
+INPUT_REGEX="https:\/\/cef-builds.spotifycdn.com\/cef_binary_([^\+\%]+)(\+|\%2B)([^\+\%]+)(\+|\%2B)chromium-([^_]+)_linux64_[^\.]+\.tar\.bz2"
 
 # use arguments, if any
 if [ $# -ne 0 ]; then
