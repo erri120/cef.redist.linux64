@@ -6,30 +6,17 @@ on:
       url:
         description: CDN URL
         type: string
-      cef_version:
-        description: CEF_VERSION
-        type: string
-      cef_commit:
-        description: CEF_COMMIT
-        type: string
-      chromium_version:
-        description: CHROMIUM_VERSION
-        type: string
+        required: true
 
 jobs:
   release:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Run script with URL
+    - name: Run script
       if: ${{ inputs.url }}
       shell: bash
       run: build.sh ${{ inputs.url }}
-
-    - name: Run script with inputs
-      if: ${{ cef_version }}
-      shell: bash
-      run: build.sh ${{ inputs.cef_version }} ${{ inputs.cef_commit }} ${{ inputs.chromium_version }}
 
     - name: Push to NuGet
       run: nuget push *.nupkg -ApiKey ${{ secrets.NUGET_API_KEY }} -Source https://api.nuget.org/v3/index.json
