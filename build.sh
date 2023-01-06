@@ -54,6 +54,10 @@ else
     exit 1
 fi
 
+if [[ ! -z ${GITHUB_OUTPUT} ]]; then
+    echo "CEF_VERSION=${CEF_VERSION}" >> ${GITHUB_OUTPUT}
+fi
+
 DOWNLOAD_FILE="cef-${CEF_VERSION}.tar.bz2"
 EXTRACT_DIR="extract-${CEF_VERSION}"
 

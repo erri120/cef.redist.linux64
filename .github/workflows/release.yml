@@ -19,8 +19,16 @@ jobs:
       run: chmod +x "${GITHUB_WORKSPACE}/build.sh"
 
     - name: Run script
+      id: build-script
       shell: bash
       run: bash "${GITHUB_WORKSPACE}/build.sh" ${{ inputs.url }}
 
-    - name: Push to NuGet
-      run: nuget push *.nupkg -ApiKey ${{ secrets.NUGET_API_KEY }} -Source https://api.nuget.org/v3/index.json
+    # - name: Push to NuGet
+    #   run: nuget push *.nupkg -ApiKey ${{ secrets.NUGET_API_KEY }} -Source https://api.nuget.org/v3/index.json
+
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ steps.build-script.outputs.CEF_VERSION }}
+        files: |
+          *.nupkg
