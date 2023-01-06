@@ -1,8 +1,18 @@
 #!/bin/bash
 
 # requirements
+if [ hash git 2>/dev/null ]; then
+    echo "command 'git' is missing!"
+    exit 1
+fi
+
 if [ hash curl 2>/dev/null ]; then
     echo "command 'curl' is missing!"
+    exit 1
+fi
+
+if [ hash tar 2>/dev/null ]; then
+    echo "command 'tar' is missing!"
     exit 1
 fi
 
@@ -12,6 +22,19 @@ if [ hash nuget 2>/dev/null ]; then
 fi
 
 # variables
+GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+GIT_COMMIT="$(git rev-parse HEAD)"
+
+if [[ -z ${GIT_BRANCH} ]]; then
+    echo "unable to get the current git branch!"
+    exit 1
+fi
+
+if [[ -z ${GIT_COMMIT} ]]; then
+    echo "unable to get the current git commit!"
+    exit 1
+fi
+
 CEF_VERSION="91.1.6"
 CEF_COMMIT="g8a752eb"
 CHROMIUM_VERSION="91.0.4472.77"
@@ -48,6 +71,8 @@ if [ $# -ne 0 ]; then
     fi
 fi
 
+echo "GIT_BRANCH: ${GIT_BRANCH}"
+echo "GIT_COMMIT: ${GIT_COMMIT}"
 echo "CEF_VERSION: ${CEF_VERSION}"
 echo "CEF_COMMIT: ${CEF_COMMIT}"
 echo "CHROMIUM_VERSION: ${CHROMIUM_VERSION}"
@@ -112,4 +137,4 @@ echo "copying license file"
 cp ${CEF_LICENSE_FILE} ${OUTPUT_DIR}
 
 echo "running nuget pack"
-nuget pack cef.redist.linux64.nuspec -Version ${CEF_VERSION}
+nuget pack cef.redist.linux64.nuspec -properties "version=${CEF_VERSION};branch=${GIT_BRANCH};commit=${GIT_COMMIT}"

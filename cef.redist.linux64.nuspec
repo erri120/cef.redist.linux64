@@ -4,13 +4,13 @@
         <id>cef.redist.linux64</id>
         <authors>The Chromium Embedded Framework Authors</authors>
         <description>CEF - the Chromium Embedded Framework</description>
-        <version>0.0.0</version>
+        <version>$version$</version>
 
         <license type="file">LICENSE.txt</license>
         <readme>README.md</readme>
 
         <projectUrl>https://github.com/erri120/cef.redist.linux64</projectUrl>
-        <repository type="git" url="https://github.com/erri120/cef.redist.linux64.git" branch="master"/>
+        <repository type="git" url="https://github.com/erri120/cef.redist.linux64.git" branch="$branch$" commit="$commit$"/>
     </metadata>
     <files>
         <file src="LICENSE.txt" target=""/>
