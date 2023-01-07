@@ -26,6 +26,9 @@ jobs:
     # - name: Push to NuGet
     #   run: nuget push *.nupkg -ApiKey ${{ secrets.NUGET_API_KEY }} -Source https://api.nuget.org/v3/index.json
 
+    - name: Push to GitHub Packages
+      run: nuget push *.nupkg -ApiKey ${{ secrets.GITHUB_TOKEN }} -Source https://nuget.pkg.github.com/erri120/index.json
+
     - name: Create Release
       uses: softprops/action-gh-release@v1
       with:
